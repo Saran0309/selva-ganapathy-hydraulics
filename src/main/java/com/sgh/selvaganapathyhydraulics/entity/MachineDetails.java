@@ -16,13 +16,14 @@ public class MachineDetails {
     private Map<String, String> keySpecs; // Key specifications with dynamic key-value pairs
     private String description;
     private String workingMechanism;
-    private String parentType; // Assuming parentType is the machine category/type
+    private String parentType;// Assuming parentType is the machine category/type
+    private String totalPrice;
 
     // Constructors, getters, and setters
 
     public MachineDetails() {}
 
-    public MachineDetails(String id, String name, String parentType, List<String> images, Map<String, String> keySpecs, String description, String workingMechanism) {
+    public MachineDetails(String id, String name, String parentType, List<String> images, Map<String, String> keySpecs, String description, String workingMechanism,String totalPrice) {
         this.id = id;
         this.name = name;
         this.parentType = parentType;
@@ -30,6 +31,7 @@ public class MachineDetails {
         this.keySpecs = keySpecs;
         this.description = description;
         this.workingMechanism = workingMechanism;
+        this.totalPrice = totalPrice;
     }
 
     public String getId() {
@@ -86,6 +88,13 @@ public class MachineDetails {
 
     public void setParentType(String parentType) {
         this.parentType = parentType;
+    }
+    
+    public void setTotalPrice(String totalPrice) {
+    	this.totalPrice = totalPrice;
+    }
+    public String getTotalPrice() {
+    	return totalPrice;
     }
 
     @Override

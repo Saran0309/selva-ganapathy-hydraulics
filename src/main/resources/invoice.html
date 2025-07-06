@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 40px;
+        }
+
+        .header {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .section {
+            margin: 20px 0;
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 16px;
+        }
+
+        .account-details {
+            margin-top: 30px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 60px;
+        }
+
+        .signature-block {
+            text-align: right;
+        }
+
+        .signature-img {
+            height: 40px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+        <img th:src="@{src/main/resources/SGHLogo.jpg}" alt="SGH Logo" style="height: 90px;" />
+        <div>
+            <h2 style="margin: 0;">SELVA GANAPATHI HYDRAULICS</h2>
+            <p style="margin: 0;">487, Gandhi Nagar Road, KUNNATHUR - 638103, Tirupur (Dt).</p>
+            <p style="margin: 0;">Email: sgharasu@gmail.com | Cell: 75026 21020, 74026 21020</p>
+        </div>
+    </div>
+</div>
+
+
+    <div class="section">
+        <p><strong>Date:</strong> <span th:text="${date}">2025-07-06</span></p>
+        <p th:text="${recipient}">To: Company Name, Address, Phone...</p>
+    </div>
+
+    <h3>WOOD CUTTER MACHINE MOTOR TYPE WITHOUT MOTOR</h3>
+
+    <ol>
+        <li th:each="item : ${items}" th:text="${item}">Dynamic Item</li>
+    </ol>
+
+    <p><strong>Total Amount:</strong> <span th:text="${amount}"></span></p>
+    <p>With out GST Bill, and With out Transport.</p>
+
+    <div class="account-details">
+        <h4>ACCOUNT DETAILS</h4>
+        <p th:text="${bankDetails}">STATE BANK OF INDIA, A/C NO: 34567494532</p>
+    </div>
+
+    <div class="footer">
+        <div class="signature-block">
+            <p><strong>Signature</strong></p>
+            <img th:src="@{src/main/resources/signature.jpg}" alt="Signature" class="signature-img" />
+        </div>
+    </div>
+
+</body>
+</html>
