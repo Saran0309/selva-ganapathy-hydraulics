@@ -1,13 +1,15 @@
 package com.sgh.selvaganapathyhydraulics.helper;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.ByteArrayOutputStream;
-import java.util.Map;
-
+@Component
 public class pdfGenerator {
 
     public static ByteArrayOutputStream generate(String templateName, Map<String, Object> model) {
