@@ -85,7 +85,9 @@ public class Translator {
             for (PropertyDescriptor prop : props) {
                 String fieldName = prop.getName();
 
-                if (fieldName.equalsIgnoreCase("videoLink") || fieldName.equalsIgnoreCase("images")) continue;
+                if (fieldName.equalsIgnoreCase("videoLink") || fieldName.equalsIgnoreCase("images") 
+                		|| fieldName.equalsIgnoreCase("image") || fieldName.equalsIgnoreCase("thumbnail")
+                		|| fieldName.equalsIgnoreCase("_class") || fieldName.equalsIgnoreCase("parentType")) continue;
 
                 Method getter = prop.getReadMethod();
                 Method setter = prop.getWriteMethod();
@@ -191,7 +193,6 @@ public class Translator {
                 .getJSONObject(0)
                 .getString("text");
 
-            // Fix: Ensure trimming and remove metadata if Gemini includes any text around array
             jsonArrayText = jsonArrayText.trim();
             if (!jsonArrayText.startsWith("[")) {
                 int idx = jsonArrayText.indexOf("[");
