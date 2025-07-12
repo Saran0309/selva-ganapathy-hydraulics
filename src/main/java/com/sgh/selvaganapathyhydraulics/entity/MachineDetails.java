@@ -16,14 +16,40 @@ public class MachineDetails {
     private Map<String, String> keySpecs; // Key specifications with dynamic key-value pairs
     private String description;
     private String workingMechanism;
-    private String parentType;// Assuming parentType is the machine category/type
-    private String totalPrice;
 
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    private String parentType; // Assuming parentType is the machine category/type
+    private String type;
+    private String totalPrice;
+    private Map<String, String> videoLink;// base 64 , video link
     // Constructors, getters, and setters
 
     public MachineDetails() {}
 
-    public MachineDetails(String id, String name, String parentType, List<String> images, Map<String, String> keySpecs, String description, String workingMechanism,String totalPrice) {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Map<String, String> getVideoLink() {
+        return videoLink;
+    }
+
+    public void setVideoLink(Map<String, String> videoLink) {
+        this.videoLink = videoLink;
+    }
+
+    public MachineDetails(String id, String name, String parentType, List<String> images, Map<String, String> keySpecs, String description, String workingMechanism) {
         this.id = id;
         this.name = name;
         this.parentType = parentType;
@@ -31,7 +57,6 @@ public class MachineDetails {
         this.keySpecs = keySpecs;
         this.description = description;
         this.workingMechanism = workingMechanism;
-        this.totalPrice = totalPrice;
     }
 
     public String getId() {
@@ -88,13 +113,6 @@ public class MachineDetails {
 
     public void setParentType(String parentType) {
         this.parentType = parentType;
-    }
-    
-    public void setTotalPrice(String totalPrice) {
-    	this.totalPrice = totalPrice;
-    }
-    public String getTotalPrice() {
-    	return totalPrice;
     }
 
     @Override

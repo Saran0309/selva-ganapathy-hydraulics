@@ -13,13 +13,12 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 public class pdfGenerator {
 
     public static ByteArrayOutputStream generate(String templateName, Map<String, Object> model) {
-    	ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-    	//templateResolver.setPrefix("templates/"); // ✅ No leading slash
-    	templateResolver.setSuffix(".html");
-    	templateResolver.setTemplateMode("HTML");
-    	templateResolver.setCharacterEncoding("UTF-8");
-    	templateResolver.setCacheable(false); // optional during dev
-
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("templates/"); // ✅ Correct prefix if your invoice.html is in src/main/resources/templates/
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML");
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCacheable(false); // optional during dev
 
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
@@ -33,6 +32,11 @@ public class pdfGenerator {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ITextRenderer renderer = new ITextRenderer();
             renderer.setDocumentFromString(htmlContent);
+            // It's good practice to set a base URL for relative paths if you have any,
+            // though for Base64 embedded images, it's less critical.
+            // renderer.setSharedContext(renderer.getSharedContext());
+            // renderer.getSharedContext().setBaseURL("file:/your/base/path/"); // If you had external images
+
             renderer.layout();
             renderer.createPDF(outputStream);
             return outputStream;

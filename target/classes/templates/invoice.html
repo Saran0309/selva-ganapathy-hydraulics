@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Invoice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+await page.pdf({
+  path: 'output.pdf',
+  format: 'A4',
+  printBackground: true,
+  margin: {
+    top: '0px',
+    bottom: '0px',
+    left: '0px',
+    right: '0px',
+  },
+})
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .to {
+            text-align: right;
+        }
+
+        p {
+            margin: 0px 0px 4px 0px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .header-text {
+            text-align: center;
+        }
+
+        .header-text h2 {
+            font-size: 20px;
+            color: #C62828;
+            margin-bottom: 5px;
+        }
+
+        .header-text p {
+            font-size: 10px;
+            color: #40B7FF;
+        }
+
+        .header-text p.email-cell {
+            position: relative;
+            font-size: 10px;
+            color: #40B7FF;
+        }
+
+        .header-text p.email-cell::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            top: 15px;
+            width: 100%;
+            height: 2px;
+            background-color: #40B7FF;
+        }
+
+        .section {
+            margin: 10px 0;
+        }
+
+        .to-address {
+            white-space: pre-line;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .to-address strong {
+            font-weight: bold;
+        }
+
+        .to-address span {
+            display: block;
+            margin-top: 5px;
+        }
+
+        ol {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        ol li {
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #222;
+            text-decoration: underline;
+        }
+
+        .amount-details {
+            margin-top: 25px;
+            padding-right: 20px;
+        }
+
+        .amount-details p {
+            margin-bottom: 4px;
+        }
+
+        .bold-amount {
+            font-weight: bold;
+        }
+
+        .account-details {
+            margin-top: 2px;
+            border-top: 1px solid #eee;
+            padding-top: 0px;
+        }
+
+        .account-details h4 {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #333;
+            text-decoration: underline;
+        }
+
+        .account-details p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .signature-block {
+            text-align: right;
+            margin-right: 15px;
+        }
+
+
+
+ .signature-img {
+            width: 120px;
+            margin-top: 0px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="header-text">
+            <h2>SELVA GANAPATHI HYDRAULICS</h2>
+            <p>487, Gandhi Nagar Road, KUNNATHUR - 638103, Tirupur (Dt).</p>
+            <p class="email-cell">Email: sgharasu@gmail.com | Cell: 75026 21020, 74026 21020</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <p class="to"><strong>Date:</strong> <span th:text="${date}"></span></p>
+        <p class="to-address"><strong>To,</strong><br/><span th:text="${recipient}"></span></p>
+    </div>
+
+    <!-- Machine Name with Underline Heading -->
+    <h3 th:text="${machineName}">Machine Name Placeholder</h3>
+
+    <ol style="list-style: none; padding-left: 0;">
+        <th:block th:each="item, iterStat : ${items}">
+            <li style="font-weight: bold;">
+                <span th:text="${iterStat.index + 1} + '. '"></span>
+                <span th:text="${item}"></span>
+            </li>
+        </th:block>
+    </ol>
+
+
+
+    <div class="amount-details">
+        <p><strong>Total Amount:</strong> <span th:text="${amount}" class="bold-amount"></span></p>
+        <p> <span th:text="${firstAdvance}" class="bold-amount"></span></p>
+        <p> <span th:text="${secondAdvance}" class="bold-amount"></span></p>
+        <p style="white-space: pre-line;" th:text="${otherContent}">Other content goes here...</p>
+        <p>Without GST Bill and Without Transport.</p>
+    </div>
+
+    <!-- Account Details with Underline Heading -->
+    <div class="account-details">
+        <h3><strong>ACCOUNT DETAILS</strong></h3>
+        <p><strong>Bank:</strong> <span th:text="${bankName}">STATE BANK OF INDIA</span></p>
+        <p><strong>A/C NO:</strong> <span th:text="${accountNumber}">34567445932</span></p>
+        <p><strong>Name:</strong> <span th:text="${accountHolderName}">A.Thanikai Arasu</span></p>
+        <p><strong>IFSC NO:</strong> <span th:text="${ifscCode}">SBIN0014784</span></p>
+        <p><strong>Branch:</strong> <span th:text="${branchName}">Kunnathur</span></p>
+    </div>
+
+    <div class="footer">
+        <div class="signature-block">
+            <p><strong> A.Thanikai Arasu</strong></p> <img th:src="${signatureBase64}" alt="Signature" class="signature-img" />
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
