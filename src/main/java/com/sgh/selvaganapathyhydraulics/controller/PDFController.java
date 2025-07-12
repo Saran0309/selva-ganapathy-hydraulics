@@ -81,7 +81,6 @@ public class PDFController {
 			model.put("sghLogoBase64", getImageBase64("static/SGHLogo.jpg"));
 			model.put("signatureBase64", getImageBase64("static/signature.png"));
 		} catch (IOException e) {
-			System.err.println("Error loading image: " + e.getMessage());
 			// Handle error, maybe set default or null to prevent PDF generation failure
 		}
 
@@ -130,15 +129,14 @@ public class PDFController {
 		//{name=new machine, recipient=lnr, totalPrice=1234, firstAdvance=5, secondAdvance=6, others=machine deliveres, 12=21}
 
 		Map<String, Object> model = new HashMap<>();
-		System.out.println(keySpec);
 		NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH);
 		String formattedAmount;
-	if(!keySpec.get("firstAdvance").isEmpty()){
-		// Format the amount
-		 formattedAmount = numberFormat.format( Long.parseLong(keySpec.get("firstAdvance")));
+		if(!keySpec.get("firstAdvance").isEmpty()){
+			// Format the amount
+			formattedAmount = numberFormat.format( Long.parseLong(keySpec.get("firstAdvance")));
 
-		model.put("firstAdvance", "First Advance: Rs."  + formattedAmount + "/-");
-	}
+			model.put("firstAdvance", "First Advance: Rs."  + formattedAmount + "/-");
+		}
 		if(!keySpec.get("secondAdvance").isEmpty()){
 			formattedAmount = numberFormat.format( Long.parseLong((keySpec.get("secondAdvance"))));
 			model.put("secondAdvance",   "Second Advance: Rs."  + formattedAmount + "/-");
@@ -160,7 +158,7 @@ public class PDFController {
 		// Create a NumberFormat instance for the default locale (it will format numbers with commas)
 
 		// Format the amount
-		 formattedAmount = numberFormat.format( Long.parseLong(totalPrice));
+		formattedAmount = numberFormat.format( Long.parseLong(totalPrice));
 
 		model.put("amount", "Rs."  + formattedAmount + "/-"); // Format as in original
 		model.put("date", LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))); // Format date as 23/06/2025
@@ -179,7 +177,6 @@ public class PDFController {
 			model.put("sghLogoBase64", getImageBase64("static/SGHLogo.jpg"));
 			model.put("signatureBase64", getImageBase64("static/signature.png"));
 		} catch (IOException e) {
-			System.err.println("Error loading image: " + e.getMessage());
 			// Handle error, maybe set default or null to prevent PDF generation failure
 		}
 
